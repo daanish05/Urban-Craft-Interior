@@ -1,0 +1,16 @@
+"use client";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+export { gsap, ScrollTrigger };
+
+export const EASE = {
+  out: "power3.out",
+  inOut: "power2.inOut",
+  expo: "expo.out",
+};
