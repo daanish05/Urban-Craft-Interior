@@ -147,18 +147,6 @@ html.theme-transition *::after {
   color: var(--color-charcoal);
 }
 
-@media (pointer: fine) {
-  body,
-  a,
-  button,
-  input,
-  select,
-  textarea,
-  [role="button"] {
-    cursor: none;
-  }
-}
-
 /* Utility: hide scrollbar for horizontal strips */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

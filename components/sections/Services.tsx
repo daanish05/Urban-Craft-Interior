@@ -78,7 +78,7 @@ export default function Services() {
           {SERVICES.map((service, i) => (
             <div
               key={service.id}
-              className="group relative -mx-2 flex cursor-none items-center justify-between border-b border-border px-2 py-6 transition-colors duration-300 hover:bg-fg-primary hover:text-fg-inverse md:-mx-4 md:px-4 md:py-8"
+              className="group relative -mx-2 flex items-center justify-between border-b border-border px-2 py-6 transition-colors duration-300 hover:bg-fg-primary hover:text-fg-inverse md:-mx-4 md:px-4 md:py-8"
               data-cursor="view"
               onMouseEnter={() => setActive(i)}
               onMouseLeave={() => setActive(null)}

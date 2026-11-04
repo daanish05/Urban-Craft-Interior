@@ -187,7 +187,7 @@ export default function Hero() {
       
       <div className="flex min-h-[calc(100svh-100px)] flex-col md:flex-row md:min-h-[calc(100svh-120px)]">
         {/* Left Panel - Slideshow Image (42%) */}
-        <div className="relative h-[40svh] w-full overflow-hidden md:h-auto md:w-[42%] lg:w-[40%]">
+        <div className="relative h-[40svh] w-full overflow-hidden md:h-auto md:w-[80%] lg:w-[78%]">
           {/* Diagonal/Slanted Edge - Desktop Only */}
           <div className="pointer-events-none absolute inset-0 z-10 hidden md:block">
             {/* Main diagonal cut */}
@@ -199,10 +199,11 @@ export default function Hero() {
             />
             {/* Gold accent line on diagonal */}
             <div
-              className="absolute right-[60px] top-0 h-full w-[2px] bg-gradient-to-b from-gold/0 via-gold/60 to-gold/0"
+              className="absolute right-[-50px] top-0 h-full w-[2px] bg-gradient-to-b from-gold/0 via-gold/60 to-gold/0"
               style={{
-                transform: "skewX(-15deg)",
-                transformOrigin: "top right",
+                transform: "skewX(-12deg)",
+                // transformOrigin: "top right",
+                transformOrigin: "top right", 
               }}
             />
           </div>
@@ -234,7 +235,7 @@ export default function Hero() {
                       : "scale(1.08)",
                   transition: prefersReducedMotion()
                     ? "none"
-                    : "transform 6s ease-out",
+                    : "transform 4s ease-out",
                 }}
               />
               {/* Subtle dark overlay for depth */}
@@ -248,23 +249,24 @@ export default function Hero() {
           ref={contentRef}
           className="relative flex min-h-[60svh] w-full flex-col justify-center px-6 py-12 md:w-[58%] md:min-h-0 md:px-12 md:py-16 lg:w-[60%] lg:px-16 xl:px-24"
         >
-          <div ref={textContentRef} className="max-w-xl">
+          <div ref={textContentRef} className="max-w-xl translate-x-0 md:translate-x-13">
             {/* Eyebrow */}
             <p
               data-hero-el
-              className="mb-4 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-gold opacity-0 md:text-[0.65rem]"
+              className="mb-4 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-gold opacity-0 md:text-[1.15rem]"
             >
-              INTERIOR DESIGN · 3D VISUALIZATION · MANUFACTURING · EXECUTION
+              {/* DESIGN · MANUFACTURING · EXECUTION */}
+              Innovation that Inspires
             </p>
 
             {/* Category Title */}
             <h1
               key={`title-${slide.id}`}
-              className="display text-[10vw] leading-[0.92] text-fg-primary opacity-0 md:text-[4vw] lg:text-[3.2vw]"
+              className="display text-[10vw] leading-[0.92] text-fg-primary opacity-0 md:text-[4vw] lg:text-[4.8vw]"
               style={{
                 animation: prefersReducedMotion()
                   ? "none"
-                  : "fadeSlideUp 0.5s ease forwards",
+                  : "fadeSlideUp 1.2s ease forwards",
               }}
             >
               {slide.title}
@@ -306,8 +308,9 @@ export default function Hero() {
               data-hero-el
               className="mt-6 text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-gold opacity-0 md:text-[0.65rem]"
             >
-              DESIGNED. <span className="text-fg-primary/40">MANUFACTURED.</span>{" "}
-              <span className="text-fg-primary/40">EXECUTED.</span>
+              DESIGN.MANUFACTURE.EXECUTE.
+              {/* <span className="text-fg-primary/40">MANUFACTURED.</span>{" "}
+              <span className="text-fg-primary/40">EXECUTED.</span> */}
             </p>
 
             {/* CTA Buttons */}

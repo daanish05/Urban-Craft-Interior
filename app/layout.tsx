@@ -3,7 +3,6 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import ThemeProvider from "@/components/providers/ThemeProvider";
-import Cursor from "@/components/ui/Cursor";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MobileCTA from "@/components/layout/MobileCTA";
@@ -63,7 +62,6 @@ export default function RootLayout({
       <body className="min-h-full bg-ivory text-charcoal dark:bg-charcoal dark:text-ivory">
         <ThemeProvider>
           <SmoothScroll>
-            <Cursor />
             <Navbar />
             <main>{children}</main>
             <Footer />
