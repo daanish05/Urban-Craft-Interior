@@ -74,7 +74,7 @@ export default function Navbar() {
       }).filter(Boolean);
       
       for (const section of sections) {
-        if (scrollY >= section.top - window.innerHeight * 0.3 && 
+        if (section && scrollY >= section.top - window.innerHeight * 0.3 && 
             scrollY < section.top + section.height - window.innerHeight * 0.3) {
           setActiveHash(`#${section.id}`);
           return;
