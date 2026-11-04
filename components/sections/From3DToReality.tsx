@@ -64,7 +64,7 @@ export default function From3DToReality() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-[#161513]"
+      className="relative h-screen overflow-hidden bg-charcoal"
     >
       <div className="flex h-full flex-col justify-center gap-5 px-6 py-14 md:flex-row md:items-center md:gap-8 md:px-12 md:py-24">
         <div className="relative h-[34vh] w-full overflow-hidden md:h-[72vh] md:w-1/2">
@@ -87,11 +87,11 @@ export default function From3DToReality() {
         </div>
 
         <div className="flex w-full flex-col justify-center md:w-1/2 md:pl-12">
-          <p className="eyebrow mb-2 text-[#c2a878]">From 3D to Reality</p>
-          <h2 className="display mb-6 text-4xl text-[#faf7f0] md:mb-10 md:text-6xl">
+          <p className="eyebrow mb-2 text-gold">From 3D to Reality</p>
+          <h2 className="display mb-6 text-4xl text-ivory md:mb-10 md:text-6xl">
             SEE IT BEFORE
             <br />
-            <em className="text-[#c2a878]">IT EXISTS.</em>
+            <em className="text-gold">IT EXISTS.</em>
           </h2>
 
           <div className="space-y-3 md:space-y-5">
@@ -104,7 +104,7 @@ export default function From3DToReality() {
                 className="flex items-baseline gap-4 transition-all duration-500 md:gap-5"
                 style={{ opacity: i === 0 ? 1 : 0.35 }}
               >
-                <span className="display text-xl text-[#c2a878] md:text-2xl">
+                <span className="display text-xl text-gold md:text-2xl">
                   {stage.id}
                 </span>
                 <div>
@@ -117,10 +117,10 @@ export default function From3DToReality() {
             ))}
           </div>
 
-          <div className="mt-6 h-[1px] w-full max-w-sm bg-[#faf7f0]/20 md:mt-10">
+          <div className="mt-6 h-[1px] w-full max-w-sm bg-ivory/20 md:mt-10">
             <div
               ref={barRef}
-              className="h-[1px] bg-[#c2a878] transition-all duration-500"
+              className="h-[1px] bg-gold transition-all duration-500"
               style={{ width: "0%" }}
             />
           </div>

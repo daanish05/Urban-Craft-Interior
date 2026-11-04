@@ -41,17 +41,17 @@ export default function HorizontalGallery() {
     <section
       ref={sectionRef}
       id="portfolio"
-      className="relative h-screen overflow-hidden bg-[#f3ede2]"
+      className="relative h-screen overflow-hidden bg-bg-primary"
     >
       <div className="flex h-full flex-col justify-center px-6 md:px-12">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4 md:mb-10">
           <div>
-            <p className="eyebrow mb-4 text-[#8b8174]">A Look Inside</p>
-            <h2 className="display text-5xl text-[#161513] md:text-7xl">
-              OUR <em className="text-[#c2a878]">INTERIORS.</em>
+            <p className="eyebrow mb-4 text-fg-secondary">A Look Inside</p>
+            <h2 className="display text-5xl text-fg-primary md:text-7xl">
+              OUR <em className="text-gold">INTERIORS.</em>
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-[#8b8174]" data-cursor="drag">
+          <p className="max-w-xs text-sm text-fg-secondary" data-cursor="drag">
             Keep scrolling — the gallery moves with you.
           </p>
         </div>
@@ -72,11 +72,11 @@ export default function HorizontalGallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6">
-                  <p className="eyebrow text-[#c2a878]">{p.type}</p>
-                  <p className="display text-3xl text-[#faf7f0]">{p.title}</p>
+                  <p className="eyebrow text-gold">{p.type}</p>
+                  <p className="display text-3xl text-ivory">{p.title}</p>
                 </div>
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[#8b8174]">
+              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-fg-secondary">
                 <span>{p.location}</span>
                 <span>{p.style}</span>
               </div>

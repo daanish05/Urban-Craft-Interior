@@ -47,13 +47,13 @@ export default function MagneticButton({
 
   const styles = {
     solid:
-      "bg-[#161513] text-[#faf7f0] hover:bg-[#c2a878] hover:text-[#161513]",
+      "bg-fg-primary text-fg-inverse hover:bg-gold hover:text-charcoal",
     outline:
-      "border border-[#161513]/30 text-[#161513] hover:border-[#161513] hover:bg-[#161513] hover:text-[#faf7f0]",
+      "border border-border text-fg-primary hover:border-fg-primary hover:bg-fg-primary hover:text-fg-inverse",
     outlineLight:
-      "border border-[#faf7f0]/40 text-[#faf7f0] hover:border-[#faf7f0] hover:bg-[#faf7f0] hover:text-[#161513]",
+      "border border-ivory/40 text-ivory hover:border-ivory hover:bg-ivory hover:text-charcoal",
     ghost:
-      "bg-transparent text-[#161513] underline decoration-[#c2a878] decoration-2 underline-offset-8",
+      "bg-transparent text-fg-primary underline decoration-gold decoration-2 underline-offset-8",
   }[variant];
 
   const cls = `${base} ${styles} ${className}`;

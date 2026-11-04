@@ -85,3 +85,35 @@ export const MATERIAL_IMAGES = [
   IMG.wood2,
   IMG.hardware,
 ];
+
+// Hero slideshow - exactly 4 main slides with subcategory captions
+export const HERO_SLIDES = [
+  {
+    id: "modular-kitchen",
+    title: "Modular Kitchen",
+    captions: ["L-Shaped Kitchen", "U-Shaped Kitchen", "Linear Kitchen"],
+    image: IMG.kitchen1,
+    description: "Custom modular kitchens designed for your space. Premium materials, smart storage, and flawless execution.",
+  },
+  {
+    id: "bedroom",
+    title: "Bedroom",
+    captions: ["Master Bedroom", "Kids Bedroom", "Guest Bedroom"],
+    image: IMG.bedroom1,
+    description: "Calm, crafted spaces to unwind. Thoughtful design that balances comfort, style, and functionality.",
+  },
+  {
+    id: "commercial-workspace",
+    title: "Commercial Workspace",
+    captions: ["Café Interiors", "Office Interiors", "Hospitality Interiors", "Conference Rooms"],
+    image: IMG.commercial,
+    description: "Professional interiors for work and hospitality. Spaces that inspire productivity and impress visitors.",
+  },
+  {
+    id: "house-interior",
+    title: "House Interior",
+    captions: ["Living Room", "Dining Room", "Foyer Design", "Complete Home Interiors"],
+    image: IMG.complete,
+    description: "Complete home transformations. From design concept to final execution, all under one roof.",
+  },
+];

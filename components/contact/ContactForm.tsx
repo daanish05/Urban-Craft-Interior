@@ -70,19 +70,19 @@ export default function ContactForm() {
   };
 
   const label =
-    "mb-2 block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#8b8174]";
+    "mb-2 block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-fg-secondary";
   const input =
-    "w-full rounded-xl border border-[#161513]/15 bg-transparent px-4 py-3 text-sm text-[#161513] outline-none transition-colors focus:border-[#c2a878] placeholder:text-[#8b8174]/60";
-  const error = "mt-1 text-xs text-[#a0522d]";
+    "w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm text-fg-primary outline-none transition-colors [color-scheme:light] dark:[color-scheme:dark] focus:border-gold placeholder:text-fg-secondary/60";
+  const error = "mt-1 text-xs text-[#a0522d] dark:text-[#e0a080]";
 
   if (status === "success") {
     return (
-      <div className="flex h-full flex-col items-center justify-center rounded-2xl bg-[#161513] p-10 text-center text-[#faf7f0]">
-        <span className="display text-5xl text-[#c2a878]">✓</span>
+      <div className="flex h-full flex-col items-center justify-center rounded-2xl bg-charcoal p-10 text-center text-ivory">
+        <span className="display text-5xl text-gold">✓</span>
         <h3 className="display mt-6 text-3xl">
           Thank you, {getValues("name")}.
         </h3>
-        <p className="mt-4 max-w-md text-sm text-[#faf7f0]/70">
+        <p className="mt-4 max-w-md text-sm text-ivory/70">
           Your consultation request has been received. We&apos;ll be in touch
           soon to help you take your space from idea to reality.
         </p>
@@ -171,15 +171,15 @@ export default function ContactForm() {
           {CONTACT_METHODS.map((m) => (
             <label
               key={m}
-              // className="flex cursor-pointer items-center gap-2 rounded-full border border-[#161513]/15 px-4 py-2 text-xs uppercase tracking-[0.12em] has-[:checked]:border-[#c2a878] has-[:checked]:bg-[#c2a878]/15"
-              className="flex cursor-pointer items-center gap-2 rounded-full border border-[#161513]/15 px-4 py-2 text-xs uppercase tracking-[0.12em] text-[#161513] has-[:checked]:border-[#c2a878] has-[:checked]:bg-[#c2a878]/15"
+              // className="flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.12em] has-[:checked]:border-gold has-[:checked]:bg-gold/15"
+              className="flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.12em] text-fg-primary has-[:checked]:border-gold has-[:checked]:bg-gold/15"
             
             >
               <input
                 type="radio"
                 value={m}
                 defaultChecked={m === "WhatsApp"}
-                className="accent-[#c2a878]"
+                className="accent-gold"
                 {...register("preferredContact")}
               />
               {m}
@@ -189,7 +189,7 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="text-sm text-[#a0522d]">
+        <p className="text-sm text-[#a0522d] dark:text-[#e0a080]">
           Something went wrong. Please try again or reach us on WhatsApp.
         </p>
       )}
@@ -198,14 +198,14 @@ export default function ContactForm() {
         {/* <button
           type="submit"
           disabled={status === "submitting"}
-          className="rounded-full bg-[#161513] px-8 py-4 text-sm font-medium text-[#faf7f0] transition-colors hover:bg-[#c2a878] hover:text-[#161513] disabled:opacity-50"
+          className="rounded-full bg-fg-primary px-8 py-4 text-sm font-medium text-fg-inverse transition-colors hover:bg-gold hover:text-charcoal disabled:opacity-50"
         >
           {status === "submitting" ? "Sending…" : "Get Free Consultation"}
         </button> */}
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="rounded-full border border-[#161513]/30 px-8 py-4 text-sm font-medium text-[#161513] transition-colors hover:bg-[#161513] hover:text-[#faf7f0] disabled:opacity-50"
+          className="rounded-full border border-border px-8 py-4 text-sm font-medium text-fg-primary transition-colors hover:bg-fg-primary hover:text-fg-inverse disabled:opacity-50"
         >
           Book Site Visit
         </button>
@@ -213,7 +213,7 @@ export default function ContactForm() {
           href={whatsappHref()}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border border-[#161513]/30 px-8 py-4 text-sm font-medium text-[#161513] transition-colors hover:bg-[#161513] hover:text-[#faf7f0]"
+          className="rounded-full border border-border px-8 py-4 text-sm font-medium text-fg-primary transition-colors hover:bg-fg-primary hover:text-fg-inverse"
         >
           WhatsApp Us
         </a>

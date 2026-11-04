@@ -38,18 +38,18 @@ export default function Packages() {
   }, []);
 
   return (
-    <section ref={ref} id="packages" className="bg-[#faf7f0] px-6 py-28 md:px-12 md:py-40">
+    <section ref={ref} id="packages" className="bg-bg-card px-6 py-28 md:px-12 md:py-40">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-6 text-[#8b8174]">Packages</p>
-            <h2 className="display text-[9vw] leading-[0.9] text-[#161513] md:text-[4.5vw]">
+            <p className="eyebrow mb-6 text-fg-secondary">Packages</p>
+            <h2 className="display text-[9vw] leading-[0.9] text-fg-primary md:text-[4.5vw]">
               CHOOSE YOUR
               <br />
-              <em className="text-[#c2a878]">INTERIOR.</em>
+              <em className="text-gold">INTERIOR.</em>
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-[#8b8174]">
+          <p className="max-w-sm text-sm leading-relaxed text-fg-secondary">
             Transparent, considered packages — each covering the full journey
             from design to execution.
           </p>
@@ -74,21 +74,21 @@ export default function Packages() {
               </div>
 
               <div className="relative p-7 md:p-9">
-                <span className="inline-block rounded-full border border-[#c2a878]/60 px-4 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#c2a878]">
+                <span className="inline-block rounded-full border border-gold/60 px-4 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-gold">
                   {pkg.tag}
                 </span>
-                <h3 className="display mt-5 text-3xl text-[#faf7f0] md:text-4xl">
+                <h3 className="display mt-5 text-3xl text-ivory md:text-4xl">
                   {pkg.title}
                 </h3>
-                <p className="mt-2 text-sm text-[#c2a878]">{pkg.subtitle}</p>
+                <p className="mt-2 text-sm text-gold">{pkg.subtitle}</p>
 
                 <ul className="mt-6 grid max-h-[400px] gap-2 overflow-hidden opacity-100 transition-all duration-700 ease-out md:max-h-0 md:opacity-0 md:group-hover:max-h-[400px] md:group-hover:opacity-100">
                   {pkg.features.map((f) => (
                     <li
                       key={f}
-                      className="flex items-center gap-3 text-sm text-[#faf7f0]/90"
+                      className="flex items-center gap-3 text-sm text-ivory/90"
                     >
-                      <span className="h-1 w-1 rounded-full bg-[#c2a878]" />
+                      <span className="h-1 w-1 rounded-full bg-gold" />
                       {f}
                     </li>
                   ))}
@@ -101,7 +101,7 @@ export default function Packages() {
                   <a
                     href="/contact"
                     data-cursor="explore"
-                    className="inline-flex items-center gap-2 rounded-full border border-[#faf7f0]/40 px-8 py-4 text-sm text-[#faf7f0] transition-colors hover:bg-[#faf7f0] hover:text-[#161513]"
+                    className="inline-flex items-center gap-2 rounded-full border border-ivory/40 px-8 py-4 text-sm text-ivory transition-colors hover:bg-ivory hover:text-charcoal"
                   >
                     View Package
                   </a>

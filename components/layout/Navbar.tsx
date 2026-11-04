@@ -6,16 +6,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, BRAND } from "@/lib/data";
 import { LOGO } from "@/lib/images";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const SECTION_IDS = ["home", "services", "portfolio", "process", "about"];
 
-const NAVBAR_HEIGHT = 100; // Approximate navbar height for offset
+const NAVBAR_HEIGHT = 100;
 
 function scrollToSection(href: string) {
-  // Handle both "#services" and "/#services" formats
   const hash = href.includes("#") ? href.split("#")[1] : "";
-  
-  // If on contact page (or any non-home page), navigate to home with hash
+
   if (window.location.pathname !== "/") {
     if (hash) {
       window.location.href = `/#${hash}`;
@@ -24,12 +24,16 @@ function scrollToSection(href: string) {
     }
     return;
   }
-  
-  // On home page - smooth scroll
+
   if (hash) {
     const el = document.getElementById(hash);
+
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+      const top =
+        el.getBoundingClientRect().top +
+        window.scrollY -
+        NAVBAR_HEIGHT;
+
       window.scrollTo({ top, behavior: "smooth" });
       history.pushState(null, "", `#${hash}`);
     }
@@ -40,52 +44,79 @@ function scrollToSection(href: string) {
 }
 
 export default function Navbar() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
-  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const [underlineStyle, setUnderlineStyle] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     const onHashChange = () => setActiveHash(window.location.hash);
+
     window.addEventListener("hashchange", onHashChange);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveHash(window.location.hash);
+
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  // Scroll spy: update hash based on visible section
+  // Scroll spy
   useEffect(() => {
     if (pathname !== "/") return;
-    
-    // Set initial active section based on scroll position
+
     const setInitialActive = () => {
       const scrollY = window.scrollY;
-      const sections = SECTION_IDS.map(id => {
+
+      const sections = SECTION_IDS.map((id) => {
         const el = document.getElementById(id);
-        return el ? { id, top: el.offsetTop, height: el.offsetHeight } : null;
+
+        return el
+          ? {
+              id,
+              top: el.offsetTop,
+              height: el.offsetHeight,
+            }
+          : null;
       }).filter(Boolean);
-      
+
       for (const section of sections) {
-        if (section && scrollY >= section.top - window.innerHeight * 0.3 && 
-            scrollY < section.top + section.height - window.innerHeight * 0.3) {
+        if (
+          section &&
+          scrollY >= section.top - window.innerHeight * 0.3 &&
+          scrollY <
+            section.top +
+              section.height -
+              window.innerHeight * 0.3
+        ) {
           setActiveHash(`#${section.id}`);
           return;
         }
       }
-      // Default to home if at top
+
       if (scrollY < window.innerHeight * 0.3) {
         setActiveHash("#home");
       }
     };
-    
+
     setInitialActive();
 
     const observer = new IntersectionObserver(
@@ -93,69 +124,94 @@ export default function Navbar() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.id;
+
             if (SECTION_IDS.includes(id)) {
               setActiveHash(`#${id}`);
             }
           }
         });
       },
-      { rootMargin: "0px 0px -50% 0px", threshold: 0.05 }
+      {
+        rootMargin: "0px 0px -50% 0px",
+        threshold: 0.05,
+      }
     );
-    
+
     SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id);
+
       if (el) observer.observe(el);
     });
-    
-    // Also listen to scroll for immediate updates
+
     const onScroll = () => setInitialActive();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    
+
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
   }, [pathname]);
 
+  // Mobile menu controls
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+
     window.addEventListener("keydown", onKey);
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
-  // Light text when the bar sits over the dark home hero or the dark
-  // menu overlay. Other pages start on a light background.
-  const light = (pathname === "/" && !scrolled) || open;
-
   const isActive = (href: string) => {
-    if (pathname === "/contact") return href === "/contact";
-    if (pathname === "/") return href === `/${activeHash}` || (activeHash === "" && href === "/");
+    if (pathname === "/contact") {
+      return href === "/contact";
+    }
+
+    if (pathname === "/") {
+      return (
+        href === `/${activeHash}` ||
+        (activeHash === "" && href === "/")
+      );
+    }
+
     return false;
   };
 
-  // Update underline position when active navlink changes
+  // Sliding navigation underline
   useEffect(() => {
     if (pathname !== "/" || !navRef.current) return;
-    
-    const activeIndex = NAV_LINKS.findIndex(link => isActive(link.href));
+
+    const activeIndex = NAV_LINKS.findIndex((link) =>
+      isActive(link.href)
+    );
+
     if (activeIndex === -1) {
-      setUnderlineStyle(prev => ({ ...prev, opacity: 0 }));
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setUnderlineStyle((prev) => ({
+        ...prev,
+        opacity: 0,
+      }));
       return;
     }
-    
-    const navLinks = navRef.current.querySelectorAll<HTMLAnchorElement>("nav > a");
+
+    const navLinks =
+      navRef.current.querySelectorAll<HTMLAnchorElement>("nav > a");
+
     const activeLink = navLinks[activeIndex];
-    
+
     if (activeLink) {
-      const navRect = navRef.current.querySelector("nav")?.getBoundingClientRect();
+      const navRect =
+        navRef.current.querySelector("nav")?.getBoundingClientRect();
+
       const linkRect = activeLink.getBoundingClientRect();
-      
+
       if (navRect) {
         setUnderlineStyle({
           left: linkRect.left - navRect.left,
@@ -166,12 +222,20 @@ export default function Navbar() {
     }
   }, [activeHash, pathname, scrolled]);
 
+  // Theme-aware colors
+  const navText = "text-fg-primary/75 hover:text-fg-primary";
+
+  const consultationButton =
+    "bg-fg-primary text-fg-inverse hover:bg-gold hover:text-charcoal";
+
+  const hamburgerColor = open ? "bg-ivory" : "bg-fg-primary";
+  const brandOnDark = open || isDark;
+
   return (
     <>
-      {/* Mobile menu overlay — sibling of the header so backdrop-blur on the
-          header never traps it, and it always covers the full viewport. */}
+      {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col justify-center bg-[#161513] px-8 pt-20 transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col justify-center bg-charcoal px-8 pt-20 transition-all duration-500 lg:hidden ${
           open
             ? "visible opacity-100"
             : "invisible pointer-events-none opacity-0"
@@ -181,7 +245,9 @@ export default function Navbar() {
         <nav className="flex flex-col gap-5">
           {NAV_LINKS.map((link, i) => {
             const active = isActive(link.href);
-            const isHashLink = link.href.includes("#") || link.href === "/";
+            const isHashLink =
+              link.href.includes("#") || link.href === "/";
+
             return (
               <a
                 key={link.href}
@@ -194,65 +260,74 @@ export default function Navbar() {
                   }
                 }}
                 tabIndex={open ? 0 : -1}
-                className={`display text-4xl text-[#faf7f0] transition-all duration-500 ${
-                  open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-                } ${active ? "text-[#c2a878]" : ""}`}
-                style={{ transitionDelay: `${i * 60}ms` }}
+                className={`display text-4xl text-ivory transition-all duration-500 ${
+                  open
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0"
+                } ${
+                  active ? "text-gold" : ""
+                }`}
+                style={{
+                  transitionDelay: `${i * 60}ms`,
+                }}
               >
                 {link.label}
               </a>
             );
           })}
         </nav>
+
         <div
           className={`mt-12 flex flex-col gap-3 transition-all delay-300 duration-500 ${
-            open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            open
+              ? "translate-y-0 opacity-100"
+              : "translate-y-4 opacity-0"
           }`}
         >
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
-            className="inline-flex items-center justify-center rounded-full bg-[#c2a878] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#161513]"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-charcoal"
           >
             Get Free Consultation
           </Link>
+
           <a
             href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
             tabIndex={open ? 0 : -1}
-            className="text-center text-xs uppercase tracking-[0.25em] text-[#faf7f0]/60"
+            className="text-center text-xs uppercase tracking-[0.25em] text-ivory/60"
           >
             {BRAND.phone}
           </a>
+
+          <div className="flex justify-center pt-4">
+            <ThemeToggle light />
+          </div>
         </div>
       </div>
-<header
+
+      {/* Main navbar */}
+      <header
         ref={navRef}
-        className={`fixed inset-x-0 top-4 z-50 transition-all duration-500 mx-4 md:mx-10 rounded-2xl ${
+        className={`fixed inset-x-0 top-4 z-50 mx-4 rounded-2xl transition-all duration-500 md:mx-10 ${
           open
             ? "border border-transparent bg-transparent"
             : scrolled
-            ? "border border-white/30 bg-white/10 backdrop-blur-[40px] backdrop-saturate-[200%] backdrop-brightness-[110%] shadow-[0_8px_40px_rgba(0,0,0,0.12),0_0_0_1px_rgba(255,255,255,0.1)_inset] [backdrop-filter:_blur(40px)_saturate(200%)_brightness(110%)]"
+            ? isDark
+              ? "border border-white/15 bg-charcoal/75 shadow-[0_8px_40px_rgba(0,0,0,0.3)] backdrop-blur-[40px] backdrop-saturate-[200%]"
+              : "border border-white/30 bg-ivory/50 shadow-[0_8px_40px_rgba(0,0,0,0.12)] backdrop-blur-[40px] backdrop-saturate-[200%]"
             : "border border-transparent bg-transparent"
         }`}
       >
-        {/* <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          open
-            ? "border-b border-transparent bg-transparent"
-            : scrolled
-              ? "border-b border-[#161513]/10 bg-[#f3ede2]/85 backdrop-blur-md"
-              : "border-b border-transparent bg-transparent"
-        }`}
-      > */}
-
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-3 md:px-10">
+          {/* Brand */}
           <Link
             href="/"
             data-cursor=""
             onClick={() => setOpen(false)}
             aria-label="Urban Craft Interior — home"
-            className="relative flex items-center gap-3 shrink-0"
+            className="relative flex shrink-0 items-center gap-3"
           >
             <div className="relative block h-11 w-11 shrink-0 md:h-12 md:w-12">
               <Image
@@ -262,9 +337,10 @@ export default function Navbar() {
                 height={1600}
                 priority
                 className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-                  light ? "opacity-100" : "opacity-0"
+                  brandOnDark ? "opacity-100" : "opacity-0"
                 }`}
               />
+
               <Image
                 src={LOGO.onLight}
                 alt=""
@@ -273,28 +349,38 @@ export default function Navbar() {
                 height={1600}
                 priority
                 className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-                  light ? "opacity-0" : "opacity-100"
+                  brandOnDark ? "opacity-0" : "opacity-100"
                 }`}
               />
             </div>
+
             <span className="flex shrink-0 flex-col items-stretch whitespace-nowrap leading-none">
-              <span className="text-center font-sans text-[20px] font-medium uppercase tracking-[0.08em] text-[#c2a878] md:text-[22px]">
+              <span className="text-center font-sans text-[20px] font-medium uppercase tracking-[0.08em] text-gold md:text-[22px]">
                 Urban
               </span>
+
               <span
                 aria-hidden="true"
-                className="mt-[5px] h-px w-full bg-[#c2a878]/80"
+                className="mt-[5px] h-px w-full bg-gold/80"
               />
-              <span className="mt-[5px] w-full text-center font-sans text-[8px] font-medium uppercase tracking-[0.22em] indent-[0.22em] text-[#faf7f0] md:text-[8.5px]">
+
+              <span
+                className={`mt-[5px] w-full text-center font-sans text-[8px] font-medium uppercase tracking-[0.22em] indent-[0.22em] md:text-[8.5px] ${
+                  open ? "text-ivory" : "text-fg-primary"
+                }`}
+              >
                 Craft Interior
               </span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex relative">
+          {/* Desktop navigation */}
+          <nav className="relative hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
- const isHashLink = link.href.includes("#") || link.href === "/";
+              const isHashLink =
+                link.href.includes("#") || link.href === "/";
+
               return (
                 <a
                   key={link.href}
@@ -308,38 +394,39 @@ export default function Navbar() {
                   }}
                   className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-colors duration-500 ${
                     active
-                      ? light
-                        ? "text-[#c2a878]"
-                        : "text-[#c2a878]"
-                      : light
-                      ? "text-[#faf7f0]/75 hover:text-[#faf7f0]"
-                      : "text-[#161513]/70 hover:text-[#161513]"
+                      ? "text-gold"
+                      : navText
                   }`}
                 >
                   {link.label}
                 </a>
               );
             })}
+
             {/* Sliding underline */}
             <span
-              className="absolute bottom-[-6px] h-[2px] bg-[#c2a878] rounded-full transition-all duration-300 ease-out"
+              className="absolute bottom-[-6px] h-[2px] rounded-full bg-gold transition-all duration-300 ease-out"
               style={{
                 left: underlineStyle.left,
                 width: underlineStyle.width,
                 opacity: underlineStyle.opacity,
               }}
             />
+
+            {/* Consultation button */}
             <Link
               href="/contact"
               data-cursor="explore"
-              className={`rounded-full bg-[#161513] px-6 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[#faf7f0] transition-all hover:bg-[#c2a878] hover:text-[#161513] ${
-                light ? "ring-1 ring-[#faf7f0]/40" : "ring-1 ring-transparent"
-              }`}
+              className={`rounded-full px-6 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] transition-all ${consultationButton}`}
             >
               Get Consultation
             </Link>
+
+            {/* Desktop theme toggle */}
+            <ThemeToggle />
           </nav>
 
+          {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
@@ -349,14 +436,15 @@ export default function Navbar() {
             className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
           >
             <span
-              className={`block h-[1px] w-6 transition-all duration-300 ${
-                light ? "bg-[#faf7f0]" : "bg-[#161513]"
-              } ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+              className={`block h-[1px] w-6 transition-all duration-300 ${hamburgerColor} ${
+                open ? "translate-y-[3.5px] rotate-45" : ""
+              }`}
             />
+
             <span
-              className={`block h-[1px] w-6 transition-all duration-300 ${
-                light ? "bg-[#faf7f0]" : "bg-[#161513]"
-              } ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+              className={`block h-[1px] w-6 transition-all duration-300 ${hamburgerColor} ${
+                open ? "-translate-y-[3.5px] -rotate-45" : ""
+              }`}
             />
           </button>
         </div>

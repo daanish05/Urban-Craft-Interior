@@ -37,7 +37,7 @@ export default function AboutUCI() {
   }, []);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#f3ede2] px-6 py-28 md:px-12 md:py-40">
+    <section ref={ref} className="relative overflow-hidden bg-bg-primary px-6 py-28 md:px-12 md:py-40">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 top-1/2 hidden w-[560px] -translate-y-1/2 opacity-[0.16] mix-blend-multiply lg:block"
@@ -53,12 +53,12 @@ export default function AboutUCI() {
       <div className="relative mx-auto max-w-[1400px]">
         <div className="grid gap-12 md:grid-cols-2 md:items-start">
           <div>
-            <p className="eyebrow mb-6 text-[#8b8174]">Why UCI Exists</p>
+            <p className="eyebrow mb-6 text-fg-secondary">Why UCI Exists</p>
             <SplitText
               text="THE PROBLEM WITH PIECES."
-              className="display text-[9vw] leading-[0.9] text-[#161513] md:text-[4vw]"
+              className="display text-[9vw] leading-[0.9] text-fg-primary md:text-[4vw]"
             />
-            <div className="mt-10 space-y-5 text-base leading-relaxed text-[#8b8174]">
+            <div className="mt-10 space-y-5 text-base leading-relaxed text-fg-secondary">
               <p>
                 Most interior projects are built from parts. A designer here, a
                 contractor there, a carpenter, a furniture vendor, a material
@@ -72,13 +72,13 @@ export default function AboutUCI() {
           </div>
 
           <div className="md:pl-10">
-            <p className="eyebrow mb-6 text-[#c2a878]">The UCI Way</p>
-            <h3 className="display text-4xl text-[#161513] md:text-5xl">
+            <p className="eyebrow mb-6 text-gold">The UCI Way</p>
+            <h3 className="display text-4xl text-fg-primary md:text-5xl">
               ONE INTEGRATED
               <br />
               INTERIOR JOURNEY.
             </h3>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-[#8b8174]">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-fg-secondary">
               UCI connects design, manufacturing and execution into a single
               process — one company, one point of responsibility, from the
               first concept to the finished interior.
@@ -87,18 +87,18 @@ export default function AboutUCI() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               {PILLARS.map((p, i) => (
                 <div key={p} data-pillar className="flex items-center gap-4">
-                  <span className="rounded-full border border-[#161513]/20 px-5 py-3 text-sm uppercase tracking-[0.18em]">
+                  <span className="rounded-full border border-border px-5 py-3 text-sm uppercase tracking-[0.18em]">
                     {p}
                   </span>
                   {i < PILLARS.length - 1 && (
-                    <span className="display text-2xl text-[#c2a878]">+</span>
+                    <span className="display text-2xl text-gold">+</span>
                   )}
                 </div>
               ))}
             </div>
 
-            <Reveal className="mt-10 border-l-2 border-[#c2a878] pl-6">
-              <p className="display text-2xl italic text-[#161513]">
+            <Reveal className="mt-10 border-l-2 border-gold pl-6">
+              <p className="display text-2xl italic text-fg-primary">
                 From 3D
                 <br />
                 to reality.

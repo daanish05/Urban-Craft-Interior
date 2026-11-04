@@ -30,7 +30,7 @@ export default function Home() {
         separator="•"
         direction="left"
         speed={36}
-        className="bg-[#161513] py-6"
+        className="bg-charcoal py-6"
         light
       />
 
@@ -44,7 +44,7 @@ export default function Home() {
         separator="•"
         direction="right"
         speed={30}
-        className="border-y border-[#161513]/10 bg-[#faf7f0] py-6"
+        className="border-y border-border bg-bg-card py-6"
       />
 
       <Packages />

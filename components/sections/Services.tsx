@@ -57,46 +57,46 @@ export default function Services() {
   }, [active]);
 
   return (
-    <section id="services" className="bg-[#f3ede2] px-6 py-28 md:px-12 md:py-40">
+    <section id="services" className="bg-bg-primary px-6 py-28 md:px-12 md:py-40">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-6 text-[#8b8174]">What We Design</p>
-            <h2 className="display text-[9vw] leading-[0.9] text-[#161513] md:text-[4.5vw]">
+            <p className="eyebrow mb-6 text-fg-secondary">What We Design</p>
+            <h2 className="display text-[9vw] leading-[0.9] text-fg-primary md:text-[4.5vw]">
               INTERIOR
               <br />
-              <em className="text-[#c2a878]">CATEGORIES.</em>
+              <em className="text-gold">CATEGORIES.</em>
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-[#8b8174]">
+          <p className="max-w-sm text-sm leading-relaxed text-fg-secondary">
             Every space, considered and crafted. Hover over a category to see
             the kind of interior we design for it.
           </p>
         </div>
 
-        <div ref={listRef} className="border-t border-[#161513]/10">
+        <div ref={listRef} className="border-t border-border">
           {SERVICES.map((service, i) => (
             <div
               key={service.id}
-              className="group relative -mx-2 flex cursor-none items-center justify-between border-b border-[#161513]/10 px-2 py-6 transition-colors duration-300 hover:bg-[#161513] hover:text-[#faf7f0] md:-mx-4 md:px-4 md:py-8"
+              className="group relative -mx-2 flex cursor-none items-center justify-between border-b border-border px-2 py-6 transition-colors duration-300 hover:bg-fg-primary hover:text-fg-inverse md:-mx-4 md:px-4 md:py-8"
               data-cursor="view"
               onMouseEnter={() => setActive(i)}
               onMouseLeave={() => setActive(null)}
             >
               <div className="flex items-baseline gap-6 md:gap-12">
-                <span className="display text-xl text-[#c2a878] transition-colors group-hover:text-[#c2a878] md:text-2xl">
+                <span className="display text-xl text-gold transition-colors group-hover:text-gold md:text-2xl">
                   {service.id}
                 </span>
                 <div>
                   <h3 className="display text-3xl transition-transform duration-500 group-hover:translate-x-2 md:text-5xl">
                     {service.name}
                   </h3>
-                  <p className="mt-1 max-w-md text-xs uppercase tracking-[0.18em] text-[#8b8174] transition-colors group-hover:text-[#c2a878] md:text-sm">
+                  <p className="mt-1 max-w-md text-xs uppercase tracking-[0.18em] text-fg-secondary transition-colors group-hover:text-gold md:text-sm">
                     {service.note}
                   </p>
                 </div>
               </div>
-              <span className="display hidden text-3xl text-[#c2a878] opacity-0 transition-all duration-300 group-hover:opacity-100 md:block">
+              <span className="display hidden text-3xl text-gold opacity-0 transition-all duration-300 group-hover:opacity-100 md:block">
                 →
               </span>
             </div>

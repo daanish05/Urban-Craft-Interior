@@ -40,15 +40,15 @@ export default function Materials() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden bg-[#faf7f0]"
+      className="relative h-screen overflow-hidden bg-bg-card"
     >
       <div className="flex h-full flex-col justify-center px-6 md:px-12">
         <div className="mb-6 md:mb-10">
-          <p className="eyebrow mb-4 text-[#8b8174]">Materials</p>
-          <h2 className="display text-5xl text-[#161513] md:text-7xl">
+          <p className="eyebrow mb-4 text-fg-secondary">Materials</p>
+          <h2 className="display text-5xl text-fg-primary md:text-7xl">
             TOUCH THE
             <br />
-            <em className="text-[#c2a878]">MATERIALS.</em>
+            <em className="text-gold">MATERIALS.</em>
           </h2>
         </div>
 
@@ -68,10 +68,10 @@ export default function Materials() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6">
-                  <p className="display text-3xl text-[#faf7f0]">{m.name}</p>
+                  <p className="display text-3xl text-ivory">{m.name}</p>
                 </div>
               </div>
-              <p className="mt-4 max-w-[90%] text-sm text-[#8b8174]">
+              <p className="mt-4 max-w-[90%] text-sm text-fg-secondary">
                 {m.note}
               </p>
             </div>

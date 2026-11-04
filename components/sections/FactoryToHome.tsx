@@ -48,19 +48,19 @@ export default function FactoryToHome() {
     <section
       ref={sectionRef}
       id="factory"
-      className="relative h-screen overflow-hidden bg-[#161513] text-[#faf7f0]"
+      className="relative h-screen overflow-hidden bg-charcoal text-ivory"
     >
       <div className="flex h-full flex-col justify-center px-6 md:px-12">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4 md:mb-10">
           <div>
-            <p className="eyebrow mb-4 text-[#c2a878]">Direct Factory to Home</p>
+            <p className="eyebrow mb-4 text-gold">Direct Factory to Home</p>
             <h2 className="display text-5xl md:text-7xl">
               FROM FACTORY
               <br />
-              <em className="text-[#c2a878]">TO YOUR HOME.</em>
+              <em className="text-gold">TO YOUR HOME.</em>
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-[#faf7f0]/60">
+          <p className="max-w-xs text-sm text-ivory/60">
             A more connected interior journey — from design and manufacturing
             to installation.
           </p>
@@ -81,13 +81,13 @@ export default function FactoryToHome() {
                 </div>
                 <div className="mt-5 flex items-center justify-between">
                   <span className="display text-2xl">{item.step}</span>
-                  <span className="text-[#c2a878]">
+                  <span className="text-gold">
                     0{i + 1} / 0{FLOW.length}
                   </span>
                 </div>
               </div>
               {i < FLOW.length - 1 && (
-                <span className="display text-4xl text-[#c2a878]">→</span>
+                <span className="display text-4xl text-gold">→</span>
               )}
             </div>
           ))}

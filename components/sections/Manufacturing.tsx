@@ -45,17 +45,17 @@ export default function Manufacturing() {
   }, []);
 
   return (
-    <section ref={ref} id="manufacturing" className="bg-[#faf7f0] px-6 py-28 md:px-12 md:py-40">
+    <section ref={ref} id="manufacturing" className="bg-bg-card px-6 py-28 md:px-12 md:py-40">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 md:grid-cols-2 md:items-end">
           <div>
-            <p className="eyebrow mb-6 text-[#8b8174]">UCI Manufacturing</p>
+            <p className="eyebrow mb-6 text-fg-secondary">UCI Manufacturing</p>
             <SplitText
               text="NOT JUST DESIGNED. ACTUALLY MADE."
-              className="display text-[9vw] leading-[0.9] text-[#161513] md:text-[4.5vw]"
+              className="display text-[9vw] leading-[0.9] text-fg-primary md:text-[4.5vw]"
             />
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-[#8b8174] md:justify-self-end md:text-base">
+          <p className="max-w-md text-sm leading-relaxed text-fg-secondary md:justify-self-end md:text-base">
             The interior you see is not just designed on a screen. It is built
             in UCI&apos;s own manufacturing capability — cabinetry, panels, cutting,
             finishing and assembly, all under one roof.
@@ -80,8 +80,8 @@ export default function Manufacturing() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-5">
-                <p className="display text-2xl text-[#faf7f0]">{c.label}</p>
-                <p className="text-xs uppercase tracking-[0.2em] text-[#c2a878]">
+                <p className="display text-2xl text-ivory">{c.label}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold">
                   {c.sub}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export default function Manufacturing() {
             separator="—"
             direction="right"
             speed={34}
-            className="border-y border-[#161513]/10 py-6"
+            className="border-y border-border py-6"
           />
         </div>
       </div>

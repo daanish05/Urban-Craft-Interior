@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  /* Core palette */
+  /* Core palette - Light theme (default) */
   --color-charcoal: #161513;
   --color-charcoal-2: #211f1c;
   --color-charcoal-3: #2c2925;
@@ -20,6 +22,26 @@
   /* Type */
   --font-serif: var(--font-cormorant);
   --font-sans: var(--font-manrope);
+
+  /* Theme-aware semantic colors */
+  --color-bg-primary: var(--color-ivory);
+  --color-bg-secondary: var(--color-ivory-2);
+  --color-bg-card: var(--color-soft);
+  --color-bg-dark: var(--color-charcoal);
+  --color-bg-dark-2: var(--color-charcoal-2);
+  --color-bg-dark-3: var(--color-charcoal-3);
+
+  --color-fg-primary: var(--color-charcoal);
+  --color-fg-secondary: var(--color-taupe);
+  --color-fg-muted: var(--color-stone);
+  --color-fg-inverse: var(--color-ivory);
+  --color-fg-inverse-muted: rgba(250, 247, 240, 0.6);
+
+  --color-accent: var(--color-gold);
+  --color-accent-muted: var(--color-gold-muted);
+
+  --color-border: var(--color-line);
+  --color-border-light: var(--color-line-light);
 }
 
 :root {
@@ -27,15 +49,54 @@
   --fg: #161513;
 }
 
+/* Dark theme overrides */
+.dark {
+  --color-bg-primary: #161513;
+  --color-bg-secondary: #211f1c;
+  --color-bg-card: #2c2925;
+  --color-bg-dark: #f3ede2;
+  --color-bg-dark-2: #ece4d3;
+  --color-bg-dark-3: #faf7f0;
+
+  --color-fg-primary: #f3ede2;
+  --color-fg-secondary: #a9a093;
+  --color-fg-muted: #8b8174;
+  --color-fg-inverse: #161513;
+  --color-fg-inverse-muted: rgba(22, 21, 19, 0.6);
+
+  --color-border: rgba(250, 247, 240, 0.16);
+  --color-border-light: rgba(22, 21, 19, 0.12);
+
+  --bg: #161513;
+  --fg: #f3ede2;
+}
+
+/* System preference fallback (only when no explicit theme class) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
+    --color-bg-primary: #161513;
+    --color-bg-secondary: #211f1c;
+    --color-bg-card: #2c2925;
+    --color-bg-dark: #f3ede2;
+    --color-bg-dark-2: #ece4d3;
+    --color-bg-dark-3: #faf7f0;
+
+    --color-fg-primary: #f3ede2;
+    --color-fg-secondary: #a9a093;
+    --color-fg-muted: #8b8174;
+    --color-fg-inverse: #161513;
+    --color-fg-inverse-muted: rgba(22, 21, 19, 0.6);
+
+    --color-border: rgba(250, 247, 240, 0.16);
+    --color-border-light: rgba(22, 21, 19, 0.12);
+
     --bg: #161513;
     --fg: #f3ede2;
   }
 }
 
 * {
-  border-color: var(--color-line);
+  border-color: var(--color-border);
 }
 
 html {
@@ -71,6 +132,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease !important;
 }
 
 ::selection {

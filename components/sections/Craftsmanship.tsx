@@ -36,9 +36,9 @@ export default function Craftsmanship() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-[#161513] px-6 py-28 text-[#faf7f0] md:px-12 md:py-40">
+    <section ref={ref} className="bg-charcoal px-6 py-28 text-ivory md:px-12 md:py-40">
       <div className="mx-auto max-w-[1400px]">
-        <p className="eyebrow mb-10 text-[#c2a878]">Craftsmanship</p>
+        <p className="eyebrow mb-10 text-gold">Craftsmanship</p>
 
         <SplitText
           text="DETAIL MAKES THE SPACE."
@@ -56,7 +56,7 @@ export default function Craftsmanship() {
                 className="h-full w-full"
               />
             </div>
-            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-[#faf7f0]/60">
+            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-ivory/60">
               Wood Grain
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function Craftsmanship() {
                 className="h-full w-full"
               />
             </div>
-            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-[#faf7f0]/60">
+            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-ivory/60">
               Hardware & Edge
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function Craftsmanship() {
                 className="h-full w-full"
               />
             </div>
-            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-[#faf7f0]/60">
+            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-ivory/60">
               Joinery & Lighting
             </p>
           </div>
@@ -98,7 +98,7 @@ export default function Craftsmanship() {
             separator="·"
             direction="left"
             speed={28}
-            className="border-y border-[#faf7f0]/10 py-6"
+            className="border-y border-ivory/10 py-6"
             light
           />
         </div>

@@ -17,14 +17,14 @@ export default function Marquee({
 }: Props) {
   const track =
     direction === "left" ? "marquee-track" : "marquee-track-reverse";
-  const textCls = light ? "text-[#faf7f0]" : "text-[#161513]";
+  const textCls = light ? "text-ivory" : "text-fg-primary";
 
   const row = (key: string) => (
     <div key={key} className="flex shrink-0 items-center">
       {items.map((item, i) => (
         <span key={`${key}-${i}`} className="flex items-center">
           <span className="whitespace-nowrap px-6">{item}</span>
-          <span className="text-[#c2a878]">{separator}</span>
+          <span className="text-gold">{separator}</span>
         </span>
       ))}
     </div>

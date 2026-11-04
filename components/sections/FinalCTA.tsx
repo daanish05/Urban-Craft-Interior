@@ -37,7 +37,7 @@ export default function FinalCTA() {
   }, []);
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#161513]">
+    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden bg-charcoal">
       <div className="absolute inset-0">
         <Image
           src={IMG.complete}
@@ -59,16 +59,16 @@ export default function FinalCTA() {
             className="h-16 w-16 object-contain md:h-20 md:w-20"
           />
         </div>
-        <p data-cta className="eyebrow mb-8 text-[#c2a878]">
+        <p data-cta className="eyebrow mb-8 text-gold">
           Start Your Interior Journey
         </p>
 
         <SplitText
           text="YOUR SPACE STARTS WITH A CONVERSATION."
-          className="display text-[11vw] leading-[0.9] text-[#faf7f0] md:text-[6vw]"
+          className="display text-[11vw] leading-[0.9] text-ivory md:text-[6vw]"
         />
 
-        <p data-cta className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-[#faf7f0]/70 md:text-lg">
+        <p data-cta className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-ivory/70 md:text-lg">
           Tell us what you have in mind. We&apos;ll help you take it from idea to
           reality.
         </p>

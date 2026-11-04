@@ -64,48 +64,48 @@ export default function Process() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative h-screen overflow-hidden bg-[#f3ede2]"
+      className="relative h-screen overflow-hidden bg-bg-primary"
     >
       <div className="mx-auto flex h-full max-w-[1400px] flex-col justify-center gap-6 px-6 md:flex-row md:items-center md:gap-16 md:px-12">
         <div className="md:w-1/2">
-          <p className="eyebrow mb-4 text-[#8b8174] md:mb-6">Our Process</p>
+          <p className="eyebrow mb-4 text-fg-secondary md:mb-6">Our Process</p>
           <span
             ref={countRef}
-            className="mb-3 inline-block text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#c2a878] md:hidden"
+            className="mb-3 inline-block text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gold md:hidden"
           >
             Step 1 / 10
           </span>
           <div className="flex items-baseline gap-4">
             <span
               ref={numRef}
-              className="display text-[15vw] leading-none text-[#c2a878] md:text-[9vw]"
+              className="display text-[15vw] leading-none text-gold md:text-[9vw]"
             >
               01
             </span>
           </div>
           <h3
             ref={titleRef}
-            className="display mt-3 text-4xl text-[#161513] md:mt-4 md:text-6xl"
+            className="display mt-3 text-4xl text-fg-primary md:mt-4 md:text-6xl"
           >
             Consultation
           </h3>
           <p
             ref={descRef}
-            className="mt-4 max-w-md text-sm leading-relaxed text-[#8b8174] md:mt-6 md:text-base"
+            className="mt-4 max-w-md text-sm leading-relaxed text-fg-secondary md:mt-6 md:text-base"
           >
             We listen to how you live and what you need.
           </p>
-          <div className="mt-6 h-[1px] w-full max-w-md bg-[#161513]/10 md:mt-10">
+          <div className="mt-6 h-[1px] w-full max-w-md bg-fg-primary/10 md:mt-10">
             <div
               ref={barRef}
-              className="h-[1px] bg-[#c2a878] transition-all duration-300"
+              className="h-[1px] bg-gold transition-all duration-300"
               style={{ width: "0%" }}
             />
           </div>
         </div>
 
         <div className="hidden md:block md:w-1/2">
-          <div className="flex flex-col gap-3 border-l border-[#161513]/10 pl-8">
+          <div className="flex flex-col gap-3 border-l border-border pl-8">
             {PROCESS_STEPS.map((step, i) => (
               <div
                 key={step.id}
@@ -115,10 +115,10 @@ export default function Process() {
                 className="flex items-baseline gap-4 transition-all duration-400"
                 style={{ opacity: i === 0 ? 1 : 0.3 }}
               >
-                <span className="display text-lg text-[#c2a878]">
+                <span className="display text-lg text-gold">
                   {step.id}
                 </span>
-                <span className="text-base font-medium text-[#161513]">
+                <span className="text-base font-medium text-fg-primary">
                   {step.title}
                 </span>
               </div>

@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/motion";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const mql =
@@ -45,7 +48,9 @@ export default function Cursor() {
       if (text) {
         label.textContent = text;
         gsap.to(ring, {
-          backgroundColor: "rgba(22,21,19,0.92)",
+          backgroundColor: isDark
+            ? "rgba(243,237,226,0.92)"
+            : "rgba(22,21,19,0.92)",
           duration: 0.3,
         });
         gsap.to(label, { opacity: 1, scale: 1, duration: 0.3 });
@@ -93,7 +98,7 @@ export default function Cursor() {
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
     };
-  }, [enabled]);
+  }, [enabled, isDark]);
 
   if (!enabled) return null;
 
@@ -107,13 +112,15 @@ export default function Cursor() {
       >
         <span
           ref={labelRef}
-          className="font-sans text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-[#faf7f0] opacity-0"
+          className={`font-sans text-[0.55rem] font-semibold uppercase tracking-[0.18em] opacity-0 ${
+            isDark ? "text-charcoal" : "text-ivory"
+          }`}
           style={{ transform: "scale(0.6)" }}
         />
       </div>
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[101] block h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#161513]"
+        className="pointer-events-none fixed left-0 top-0 z-[101] block h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fg-primary"
         aria-hidden="true"
       />
     </>
