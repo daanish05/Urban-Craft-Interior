@@ -30,9 +30,7 @@ function scrollToSection(href: string) {
 
     if (el) {
       const top =
-        el.getBoundingClientRect().top +
-        window.scrollY -
-        NAVBAR_HEIGHT;
+        el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
 
       window.scrollTo({ top, behavior: "smooth" });
       history.pushState(null, "", `#${hash}`);
@@ -102,10 +100,7 @@ export default function Navbar() {
         if (
           section &&
           scrollY >= section.top - window.innerHeight * 0.3 &&
-          scrollY <
-            section.top +
-              section.height -
-              window.innerHeight * 0.3
+          scrollY < section.top + section.height - window.innerHeight * 0.3
         ) {
           setActiveHash(`#${section.id}`);
           return;
@@ -134,7 +129,7 @@ export default function Navbar() {
       {
         rootMargin: "0px 0px -50% 0px",
         threshold: 0.05,
-      }
+      },
     );
 
     SECTION_IDS.forEach((id) => {
@@ -175,10 +170,7 @@ export default function Navbar() {
     }
 
     if (pathname === "/") {
-      return (
-        href === `/${activeHash}` ||
-        (activeHash === "" && href === "/")
-      );
+      return href === `/${activeHash}` || (activeHash === "" && href === "/");
     }
 
     return false;
@@ -188,9 +180,7 @@ export default function Navbar() {
   useEffect(() => {
     if (pathname !== "/" || !navRef.current) return;
 
-    const activeIndex = NAV_LINKS.findIndex((link) =>
-      isActive(link.href)
-    );
+    const activeIndex = NAV_LINKS.findIndex((link) => isActive(link.href));
 
     if (activeIndex === -1) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -207,8 +197,9 @@ export default function Navbar() {
     const activeLink = navLinks[activeIndex];
 
     if (activeLink) {
-      const navRect =
-        navRef.current.querySelector("nav")?.getBoundingClientRect();
+      const navRect = navRef.current
+        .querySelector("nav")
+        ?.getBoundingClientRect();
 
       const linkRect = activeLink.getBoundingClientRect();
 
@@ -245,8 +236,7 @@ export default function Navbar() {
         <nav className="flex flex-col gap-5">
           {NAV_LINKS.map((link, i) => {
             const active = isActive(link.href);
-            const isHashLink =
-              link.href.includes("#") || link.href === "/";
+            const isHashLink = link.href.includes("#") || link.href === "/";
 
             return (
               <a
@@ -261,12 +251,8 @@ export default function Navbar() {
                 }}
                 tabIndex={open ? 0 : -1}
                 className={`display text-4xl text-ivory transition-all duration-500 ${
-                  open
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-4 opacity-0"
-                } ${
-                  active ? "text-gold" : ""
-                }`}
+                  open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                } ${active ? "text-gold" : ""}`}
                 style={{
                   transitionDelay: `${i * 60}ms`,
                 }}
@@ -279,9 +265,7 @@ export default function Navbar() {
 
         <div
           className={`mt-12 flex flex-col gap-3 transition-all delay-300 duration-500 ${
-            open
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
+            open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
           <Link
@@ -314,13 +298,13 @@ export default function Navbar() {
           open
             ? "border border-transparent bg-transparent"
             : scrolled
-            ? isDark
-              ? "border border-white/15 bg-charcoal/75 shadow-[0_8px_40px_rgba(0,0,0,0.3)] backdrop-blur-[40px] backdrop-saturate-[200%]"
-              : "border border-white/30 bg-ivory/50 shadow-[0_8px_40px_rgba(0,0,0,0.12)] backdrop-blur-[40px] backdrop-saturate-[200%]"
-            : "border border-transparent bg-transparent"
+              ? isDark
+                ? "border border-white/15 bg-charcoal/75 shadow-[0_8px_40px_rgba(0,0,0,0.3)] backdrop-blur-[40px] backdrop-saturate-[200%]"
+                : "border border-white/30 bg-ivory/50 shadow-[0_8px_40px_rgba(0,0,0,0.12)] backdrop-blur-[40px] backdrop-saturate-[200%]"
+              : "border border-transparent bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-3 md:px-10">
+        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-1.5 md:px-10">
           {/* Brand */}
           <Link
             href="/"
@@ -329,32 +313,27 @@ export default function Navbar() {
             aria-label="Urban Craft Interior — home"
             className="relative flex shrink-0 items-center gap-3"
           >
-            <div className="relative block h-11 w-11 shrink-0 md:h-12 md:w-12">
+            <div className="relative block h-12 w-48 shrink-0 md:h-20 md:w-20">
               <Image
                 src={LOGO.onDark}
                 alt="Urban Craft Interior logo"
-                width={1600}
-                height={1600}
+                width={400}
+                height={100}
                 priority
-                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-                  brandOnDark ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 h-full w-full object-left object-contain transition-opacity duration-500 ${brandOnDark ? "opacity-100" : "opacity-0"}`}
               />
-
               <Image
                 src={LOGO.onLight}
                 alt=""
                 aria-hidden="true"
-                width={1600}
-                height={1600}
+                width={400}
+                height={100}
                 priority
-                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-                  brandOnDark ? "opacity-0" : "opacity-100"
-                }`}
+                className={`absolute inset-0 h-full w-full object-left object-contain transition-opacity duration-500 ${brandOnDark ? "opacity-0" : "opacity-100"}`}
               />
             </div>
 
-            <span className="flex shrink-0 flex-col items-stretch whitespace-nowrap leading-none">
+            <span className="hidden md:flex shrink-0 flex-col items-stretch whitespace-nowrap leading-none">
               <span className="text-center font-sans text-[20px] font-medium uppercase tracking-[0.08em] text-gold md:text-[22px]">
                 Urban
               </span>
@@ -372,14 +351,31 @@ export default function Navbar() {
                 Craft Interior
               </span>
             </span>
+            {/* <span className="flex shrink-0 flex-col items-stretch whitespace-nowrap leading-none">
+              <span className="text-center font-sans text-[20px] font-medium uppercase tracking-[0.08em] text-gold md:text-[22px]">
+                Urban
+              </span>
+
+              <span
+                aria-hidden="true"
+                className="mt-[5px] h-px w-full bg-gold/80"
+              />
+
+              <span
+                className={`mt-[5px] w-full text-center font-sans text-[8px] font-medium uppercase tracking-[0.22em] indent-[0.22em] md:text-[8.5px] ${
+                  open ? "text-ivory" : "text-fg-primary"
+                }`}
+              >
+                Craft Interior
+              </span>
+            </span> */}
           </Link>
 
           {/* Desktop navigation */}
           <nav className="relative hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
-              const isHashLink =
-                link.href.includes("#") || link.href === "/";
+              const isHashLink = link.href.includes("#") || link.href === "/";
 
               return (
                 <a
@@ -393,9 +389,7 @@ export default function Navbar() {
                     }
                   }}
                   className={`text-[0.7rem] font-medium uppercase tracking-[0.2em] transition-colors duration-500 ${
-                    active
-                      ? "text-gold"
-                      : navText
+                    active ? "text-gold" : navText
                   }`}
                 >
                   {link.label}
