@@ -49,7 +49,7 @@ export default function Hero() {
       setIsTransitioning(true);
       setCurrentSlide(index);
     },
-    [isTransitioning, currentSlide]
+    [isTransitioning, currentSlide],
   );
 
   // Reset transition state after animation completes
@@ -143,10 +143,17 @@ export default function Hero() {
       gsap.fromTo(
         textContent.querySelectorAll("[data-hero-el]"),
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, stagger: 0.07, delay: 0.2, ease: "expo.out" }
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.07,
+          delay: 0.2,
+          ease: "expo.out",
+        },
       );
 
-      // Subtle exit on scroll
+      // Subtle exit on scroll - only for the content area, not the whole section
       gsap.to(content, {
         y: -60,
         opacity: 0,
@@ -184,8 +191,8 @@ export default function Hero() {
     >
       {/* Main container with proper spacing for fixed navbar */}
       <div className="pt-[100px] md:pt-[120px]" />
-      
-      <div className="flex min-h-[calc(100svh-100px)] flex-col md:flex-row md:min-h-[calc(100svh-120px)]">
+
+      <div className="relative flex min-h-[calc(100svh-100px)] flex-col md:flex-row md:min-h-[calc(100svh-120px)]">
         {/* Left Panel - Slideshow Image (42%) */}
         <div className="relative h-[40svh] w-full overflow-hidden md:h-auto md:w-[80%] lg:w-[78%]">
           {/* Diagonal/Slanted Edge - Desktop Only */}
@@ -203,7 +210,7 @@ export default function Hero() {
               style={{
                 transform: "skewX(-12deg)",
                 // transformOrigin: "top right",
-                transformOrigin: "top right", 
+                transformOrigin: "top right",
               }}
             />
           </div>
@@ -249,7 +256,10 @@ export default function Hero() {
           ref={contentRef}
           className="relative flex min-h-[60svh] w-full flex-col justify-center px-6 py-12 md:w-[58%] md:min-h-0 md:px-12 md:py-16 lg:w-[60%] lg:px-16 xl:px-24"
         >
-          <div ref={textContentRef} className="max-w-xl translate-x-0 md:translate-x-13">
+          <div
+            ref={textContentRef}
+            className="max-w-xl translate-x-0 md:translate-x-13"
+          >
             {/* Eyebrow */}
             <p
               data-hero-el
@@ -289,7 +299,9 @@ export default function Hero() {
                     {caption}
                   </span>
                   {idx < slide.captions.length - 1 && (
-                    <span className="text-gold text-xs" aria-hidden="true">·</span>
+                    <span className="text-gold text-xs" aria-hidden="true">
+                      ·
+                    </span>
                   )}
                 </span>
               ))}
@@ -326,79 +338,81 @@ export default function Hero() {
               </MagneticButton>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Slide Navigation */}
-          <div className="absolute bottom-6 right-6 flex items-center gap-3 md:bottom-8 md:right-12 lg:right-16 xl:right-24">
-            {/* Navigation Arrows */}
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={prevSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-fg-primary/40 transition-all hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                aria-label="Previous slide"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="h-3.5 w-3.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={nextSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-fg-primary/40 transition-all hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                aria-label="Next slide"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="h-3.5 w-3.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
-            </div>
+      {/* Slide Navigation - Absolute positioned at the bottom of the Hero section */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 md:bottom-10 md:left-auto md:right-8 md:-translate-x-0 lg:bottom-14 lg:right-12 xl:left-48">
+        {/* Navigation Arrows */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={prevSlide}
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-bg-primary/95 text-fg-primary shadow-lg backdrop-blur-sm transition-all hover:border-gold hover:bg-gold hover:text-bg-primary hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 active:scale-95"
+            aria-label="Previous slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-bg-primary/95 text-fg-primary shadow-lg backdrop-blur-sm transition-all hover:border-gold hover:bg-gold hover:text-bg-primary hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 active:scale-95"
+            aria-label="Next slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
+        </div>
 
-            {/* Slide Indicators */}
-            <div className="flex items-center gap-1">
-              {HERO_SLIDES.map((s, index) => (
-                <button
-                  key={s.id}
-                  onClick={() => goToSlide(index)}
-                  className={`h-1.5 rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    index === currentSlide
-                      ? "w-4 bg-gold"
-                      : "w-1.5 bg-fg-primary/15 hover:bg-fg-primary/30"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}: ${s.title}`}
-                  aria-current={index === currentSlide ? "true" : undefined}
-                />
-              ))}
-            </div>
+        {/* Slide Indicators with Background */}
+        <div className="flex items-center gap-1.5 rounded-full bg-bg-primary/95 px-3 py-2 shadow-lg backdrop-blur-sm">
+          {HERO_SLIDES.map((s, index) => (
+            <button
+              key={s.id}
+              onClick={() => goToSlide(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${
+                index === currentSlide
+                  ? "w-8 bg-gold shadow-md"
+                  : "w-2.5 bg-fg-primary/20 hover:bg-fg-primary/40 hover:w-4"
+              }`}
+              aria-label={`Go to slide ${index + 1}: ${s.title}`}
+              aria-current={index === currentSlide ? "true" : undefined}
+            />
+          ))}
+        </div>
 
-            {/* Slide Counter */}
-            <div className="text-[0.6rem] font-medium tracking-wider text-fg-primary/30">
-              <span className="text-fg-primary/60">
-                {String(currentSlide + 1).padStart(2, "0")}
-              </span>
-              <span className="mx-0.5">/</span>
-              <span>{String(totalSlides).padStart(2, "0")}</span>
-            </div>
-          </div>
+        {/* Slide Counter with Background */}
+        <div className="flex items-center gap-1 rounded-full bg-bg-primary/95 px-3 py-2 text-xs font-semibold tracking-wider shadow-lg backdrop-blur-sm">
+          <span className="text-gold">
+            {String(currentSlide + 1).padStart(2, "0")}
+          </span>
+          <span className="text-fg-primary/40 mx-1">/</span>
+          <span className="text-fg-primary/60">
+            {String(totalSlides).padStart(2, "0")}
+          </span>
         </div>
       </div>
 
